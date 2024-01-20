@@ -23,16 +23,16 @@ app.use('/css', express.static('node_modules/bootstrap/dist/css'));
 app.use('/js', express.static('node_modules/bootstrap/dist/js'));
 app.use('/js', express.static('node_modules/jquery/dist'));
 
-const dburi = 'mongodb+srv://ahmednagy:test123@cluster0.jnhdmvn.mongodb.net/meals?retryWrites=true&w=majority';
+//const dburi = 'mongodb+srv://ahmednagy:test123@cluster0.jnhdmvn.mongodb.net/meals?retryWrites=true&w=majority';
 
-mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => {
-        console.log("conneted to the database");
-        httpServer.listen(port, () => {
-            console.log(`Server running on localhost:${port}`)
-        })
-    })
-    .catch((err) => { console.log(err) });
+//mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true })
+//  .then((result) => {
+//        console.log("conneted to the database");
+//        httpServer.listen(port, () => {
+//            console.log(`Server running on localhost:${port}`)
+//        })
+//    })
+//    .catch((err) => { console.log(err) });
 
 
 app.use(authRoutes);
