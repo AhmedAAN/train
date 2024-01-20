@@ -1,0 +1,57 @@
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+    <div class="container">
+      <form>
+        <h2>Create Meal</h2>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="string"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Enter Meal Name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="calories">Calories</label>
+          <input
+            type="number"
+            class="form-control"
+            id="calories"
+            name="calories"
+            placeholder="Enter Meal Calories"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">submit</button>
+      </form>
+    </div>
+
+    <%- include("../partials/footer.ejs") %>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = form.name.value;
+        const calories = form.calories.value;
+
+        try {
+          const res = await fetch("/meals", {
+            method: "POST",
+            body: JSON.stringify({ name, calories }),
+            headers: { "Content-type": "application/json" },
+          });
+          data = await res.json();
+          if (data.meal) {
+            location.assign("/meals");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+    <div class="container">
+      <form>
+        <h2>Login</h2>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <a href="/signup">register</a>
+      </form>
+    </div>
+
+    <%- include("../partials/footer.ejs") %>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = form.email.value;
+        const password = form.password.value;
+
+        try {
+          const res = await fetch("/login", {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+            headers: { "Content-type": "application/json" },
+          });
+          data = await res.json();
+          if (data.user) {
+            location.assign("/meals");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    </script>
+  </body>
+</html>

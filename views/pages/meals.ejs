@@ -1,0 +1,38 @@
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+    <div class="container">
+      <div
+        class="d-flex flex-row align-items-center justify-content-between p-2"
+      >
+        <h1><%= user %> Meals</h1>
+        <a class="btn btn-success" role="button" href="/meals/create"
+          >Add Meals</a
+        >
+      </div>
+      <% for (let i = 0; i < meals.length; i++) { %> <% if (i % 3 === 0) { %>
+      <div class="row">
+        <% } %>
+
+        <div class="col-md-4">
+          <div class="card d-flex" style="width: auto">
+            <div class="card-body">
+              <h5 class="card-title"><%= meals[i].name %></h5>
+              <p class="card-text"><%= meals[i].calories %> Calories</p>
+              <div class="text-center">
+                <a href="/meals/<%= meals[i]._id %>" class="btn btn-primary"
+                  >Read</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% if (i % 3 === 2 || i === meals.length - 1) { %>
+      </div>
+      <% } %> <% } %>
+    </div>
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>
